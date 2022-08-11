@@ -1,6 +1,7 @@
 package com.example.lydiacontactsapp.data.models
 
 
+import com.example.lydiacontactsapp.domain.models.LydiaContact
 import com.squareup.moshi.Json
 
 data class Result(
@@ -28,4 +29,12 @@ data class Result(
     val picture: Picture,
     @Json(name = "registered")
     val registered: Registered
-)
+){
+    companion object{
+        fun Result.toLydiaContact() = LydiaContact(
+            name.first,
+            name.last,
+            phone
+        )
+    }
+}

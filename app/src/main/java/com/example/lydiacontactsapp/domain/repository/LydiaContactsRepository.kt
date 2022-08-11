@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface LydiaContactsRepository {
 
-    fun getContacts(): Flow<Resource<List<LydiaContact>>>
+    fun getContacts(results: Int, page: Int): Flow<Resource<Pair<Int, List<LydiaContact>>>>
 }
