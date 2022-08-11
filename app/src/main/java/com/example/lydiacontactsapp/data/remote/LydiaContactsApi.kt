@@ -6,6 +6,6 @@ import retrofit2.http.Query
 
 interface LydiaContactsApi {
 
-    @GET
+    @GET("?seed=lydia")
     suspend fun getContacts(@Query("results") results : Int , @Query("page") page : Int) : LydiaResults
 }
