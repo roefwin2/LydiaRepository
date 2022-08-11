@@ -1,4 +1,4 @@
-package com.example.lydiacontactsapp
+package com.example.lydiacontactsapp.presenter
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
