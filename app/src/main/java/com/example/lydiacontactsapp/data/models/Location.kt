@@ -11,7 +11,7 @@ data class Location(
     @Json(name = "country")
     val country: String,
     @Json(name = "postcode")
-    val postcode: Int,
+    val postcode: Any,
     @Json(name = "state")
     val state: String,
     @Json(name = "street")

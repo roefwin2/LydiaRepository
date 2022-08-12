@@ -80,4 +80,7 @@ dependencies {
     //viewmodel
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
+    // Paging Compose
+    implementation "androidx.paging:paging-compose:1.0.0-alpha10"
+
 }
