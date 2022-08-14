@@ -3,18 +3,19 @@ package com.example.lydiacontactsapp.presenter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -60,11 +61,19 @@ fun ContactsScreen(
     val lydiaContacts = contacts
     val lazyContactsItems: LazyPagingItems<LydiaContact> = lydiaContacts.collectAsLazyPagingItems()
 
-    LazyColumn {
-        items(lazyContactsItems) { contacts ->
+    Column(Modifier.fillMaxWidth()) {
+        LazyColumn {
+            items(lazyContactsItems) { contacts ->
                 Contact(contact = contacts!!)
+            }
+        }
+        Surface(Modifier.fillMaxWidth()) {
+        }
+        if(lazyContactsItems.loadState.refresh is LoadState.Loading || lazyContactsItems.loadState.append is LoadState.Loading){
+            CircularProgressIndicator()
         }
     }
+
 }
 
 @Preview(showBackground = true)
