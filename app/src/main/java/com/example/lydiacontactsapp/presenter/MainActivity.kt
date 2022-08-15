@@ -72,6 +72,10 @@ fun ContactsScreen(
         if(lazyContactsItems.loadState.refresh is LoadState.Loading || lazyContactsItems.loadState.append is LoadState.Loading){
             CircularProgressIndicator()
         }
+        if(lazyContactsItems.loadState.refresh is LoadState.Error || lazyContactsItems.loadState.append is LoadState.Error)
+        Snackbar(modifier = Modifier.padding(4.dp)) {
+            Text(text = "This is a basic snackbar")
+        }
     }
 
 }
