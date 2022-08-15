@@ -1,6 +1,7 @@
 package com.example.lydiacontactsapp.data.models
 
 
+import android.util.Pair
 import com.example.lydiacontactsapp.data.models.Result.Companion.toLydiaContact
 import com.example.lydiacontactsapp.domain.models.LydiaContact
 import com.squareup.moshi.Json

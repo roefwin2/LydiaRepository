@@ -1,4 +1,4 @@
-package com.example.lydiacontactsapp.di
+package com.example.lydiacontactsapp.di.data
 
 import com.example.lydiacontactsapp.data.remote.LydiaContactsApi
 import com.squareup.moshi.Moshi
@@ -9,7 +9,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
