@@ -41,7 +41,10 @@ data class Result(
         fun Result.toLydiaContactEntity() = LydiaContactEntity(
             firstName = name.first,
             lastName = name.last,
-            phone = phone
+            phone = phone,
+            imageUrl = picture.thumbnail,
+            title = name.title,
+            city = location.city
         )
     }
 }

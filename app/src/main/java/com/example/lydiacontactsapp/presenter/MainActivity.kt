@@ -3,6 +3,7 @@ package com.example.lydiacontactsapp.presenter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -18,6 +19,7 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import coil.compose.rememberAsyncImagePainter
 import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
 import com.example.lydiacontactsapp.ui.theme.LydiaContactsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +50,28 @@ fun Contact(contact: LydiaContactEntity) {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        Text(text = "Contact ${contact.firstName}!")
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Image(
+                painter = rememberAsyncImagePainter(contact.imageUrl),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(128.dp)
+                    .padding(4.dp)
+            )
+            Column() {
+                Text(text = "Contact ${contact.firstName}!")
+                Spacer(modifier = Modifier.padding(2.dp))
+                Text(text = "Number ${contact.lastName}!")
+                Spacer(modifier = Modifier.padding(2.dp))
+                Text(text = "Number ${contact.phone}!")
+            }
+
+        }
+
     }
 
 }
