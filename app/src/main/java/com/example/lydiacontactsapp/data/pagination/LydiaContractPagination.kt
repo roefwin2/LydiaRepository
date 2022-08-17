@@ -7,7 +7,6 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.lydiacontactsapp.data.local.database.LydiaContactsDatabase
 import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
-import com.example.lydiacontactsapp.data.local.entity.RemoteKeysEntity
 import com.example.lydiacontactsapp.data.models.LydiaResults.Companion.toLydiaContactsEntity
 import com.example.lydiacontactsapp.data.remote.LydiaContactsApi
 import okio.IOException
@@ -21,7 +20,6 @@ class LydiaContractPagination @Inject constructor(
 ) : RemoteMediator<Int, LydiaContactEntity>() {
 
     val contactsDao = dataBase.dao
-    val keysDao = dataBase.keysDao
 
     override suspend fun load(
         loadType: LoadType,
@@ -86,61 +84,6 @@ class LydiaContractPagination @Inject constructor(
             MediatorResult.Error(e)
         } catch (e: HttpException) {
             MediatorResult.Error(e)
-        }
-    }
-
-    /**
-     * this returns the page key or the final end of list success result
-     */
-    private suspend fun getKeyPageData(
-        loadType: LoadType,
-        state: PagingState<Int, LydiaContactEntity>
-    ): Int? {
-        return when (loadType) {
-            LoadType.REFRESH -> {
-                val remoteKeys = getClosestRemoteKey(state)
-                remoteKeys?.nextKey?.minus(1) ?: 1
-            }
-            LoadType.APPEND -> {
-                val remoteKeys = getLastRemoteKey(state)
-                remoteKeys?.nextKey
-            }
-            LoadType.PREPEND -> {
-                val remoteKeys = getFirstRemoteKey(state)
-                remoteKeys?.prevKey
-            }
-        }
-    }
-
-
-    /**
-     * get the last remote key inserted which had the data
-     */
-    private suspend fun getLastRemoteKey(state: PagingState<Int, LydiaContactEntity>): RemoteKeysEntity? {
-        return state.pages
-            .lastOrNull { it.data.isNotEmpty() }
-            ?.data?.lastOrNull()
-            ?.let { contact -> dataBase.keysDao.remoteKeysContactId(contact.id.toString()) }
-    }
-
-    /**
-     * get the first remote key inserted which had the data
-     */
-    private suspend fun getFirstRemoteKey(state: PagingState<Int, LydiaContactEntity>): RemoteKeysEntity? {
-        return state.pages
-            .firstOrNull() { it.data.isNotEmpty() }
-            ?.data?.firstOrNull()
-            ?.let { contact -> dataBase.keysDao.remoteKeysContactId(contact.id.toString()) }
-    }
-
-    /**
-     * get the closest remote key inserted which had the data
-     */
-    private suspend fun getClosestRemoteKey(state: PagingState<Int, LydiaContactEntity>): RemoteKeysEntity? {
-        return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.id?.let { contactId ->
-                dataBase.keysDao.remoteKeysContactId(contactId.toString())
-            }
         }
     }
 }
