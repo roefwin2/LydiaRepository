@@ -1,4 +1,4 @@
-package com.example.lydiacontactsapp.presenter
+package com.example.lydiacontactsapp.ui.components.contactsscreen
 
 
 import androidx.lifecycle.ViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 @ExperimentalPagingApi
-class MainActivityViewModel
+class ContactsScreenViewModel
 @Inject constructor(
     private val lydiaContractPagination: LydiaContractPagination
 ) : ViewModel() {

@@ -9,23 +9,24 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
-import com.example.lydiacontactsapp.presenter.CustomSnackBar
-import com.example.lydiacontactsapp.ui.components.contactitem.Contact
-import kotlinx.coroutines.flow.Flow
+import com.example.lydiacontactsapp.ui.components.items.CustomSnackBar
+import com.example.lydiacontactsapp.ui.components.items.contactitem.Contact
 
+@ExperimentalPagingApi
 @Composable
 fun ContactsScreen(
     navController: NavController,
-    contacts: Flow<PagingData<LydiaContactEntity>>
+    viewModel : ContactsScreenViewModel = hiltViewModel()
 ) {
-    val lydiaContacts = contacts
+    val lydiaContacts = viewModel.state
     val lazyContactsItems: LazyPagingItems<LydiaContactEntity> =
         lydiaContacts.collectAsLazyPagingItems()
 

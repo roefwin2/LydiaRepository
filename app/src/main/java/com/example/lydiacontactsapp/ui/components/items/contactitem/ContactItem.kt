@@ -1,4 +1,4 @@
-package com.example.lydiacontactsapp.ui.components.contactitem
+package com.example.lydiacontactsapp.ui.components.items.contactitem
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

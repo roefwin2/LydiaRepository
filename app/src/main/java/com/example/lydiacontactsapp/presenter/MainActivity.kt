@@ -47,8 +47,7 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = "contact_list_screen"
                         ){
-                            val viewModel: MainActivityViewModel = hiltViewModel()
-                            ContactsScreen(contacts = viewModel.state, navController = navController)
+                            ContactsScreen(navController = navController)
                         }
                         composable(route = "contact_details"+"/{contactId}"){
                             DetailsScreen()
@@ -60,30 +59,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-@Composable
-fun CustomSnackBar(message: String, onClickListener: (() -> Unit)) {
-    Snackbar(
-        Modifier
-            .fillMaxWidth()
-            .padding(4.dp)
-    ) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(4.dp)
-        ) {
-            Text(text = message)
-            OutlinedButton(onClick = {
-                onClickListener.invoke()
-            })
-            {
-                Text(text = "retry")
-            }
-
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
