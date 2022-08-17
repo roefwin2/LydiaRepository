@@ -16,6 +16,9 @@ interface LydiaContactsDao {
     @Query("SELECT * FROM contacts")
     fun getLydiaContacts(): PagingSource<Int,LydiaContactEntity>
 
+    @Query("SELECT * FROM contacts WHERE id LIKE :id")
+    suspend fun getLydiaContact(id: Int): LydiaContactEntity
+
     @Query("DELETE FROM contacts")
     suspend fun clearAll()
 }
