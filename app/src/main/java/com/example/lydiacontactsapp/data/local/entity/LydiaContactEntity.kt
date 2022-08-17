@@ -1,12 +1,12 @@
 package com.example.lydiacontactsapp.data.local.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.lydiacontactsapp.domain.models.LydiaContact
 
 @Entity(tableName = "contacts")
 data class LydiaContactEntity(
-    val id : String,
-    val label :String,
+    @PrimaryKey val id : Int? = null,
     val firstName :String,
     val lastName :String,
     val phone :String,
