@@ -33,14 +33,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-        useIR = true
     }
     buildFeatures {
         compose true
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.5.21'
+        kotlinCompilerVersion '1.6.10'
     }
     packagingOptions {
         resources {
@@ -81,6 +80,11 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Paging Compose
-    implementation "androidx.paging:paging-compose:1.0.0-alpha10"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha13"
+
+    //room
+    implementation "androidx.room:room-ktx:2.4.3"
+    implementation "androidx.room:room-paging:2.5.0-alpha01"
+    kapt "androidx.room:room-compiler:2.4.3"
 
 }

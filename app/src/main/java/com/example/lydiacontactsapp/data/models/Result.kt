@@ -1,6 +1,7 @@
 package com.example.lydiacontactsapp.data.models
 
 
+import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
 import com.example.lydiacontactsapp.domain.models.LydiaContact
 import com.squareup.moshi.Json
 
@@ -35,6 +36,12 @@ data class Result(
             name.first,
             name.last,
             phone
+        )
+
+        fun Result.toLydiaContactEntity() = LydiaContactEntity(
+            firstName = name.first,
+            lastName = name.last,
+            phone = phone
         )
     }
 }
