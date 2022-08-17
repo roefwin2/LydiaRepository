@@ -7,9 +7,12 @@ import com.example.lydiacontactsapp.domain.models.LydiaContact
 @Entity(tableName = "contacts")
 data class LydiaContactEntity(
     @PrimaryKey val id : Int? = null,
+    val title : String,
     val firstName :String,
     val lastName :String,
+    val imageUrl : String,
     val phone :String,
+    val city : String
 ){
     companion object{
         fun LydiaContactEntity.toLydiaContact() = LydiaContact(

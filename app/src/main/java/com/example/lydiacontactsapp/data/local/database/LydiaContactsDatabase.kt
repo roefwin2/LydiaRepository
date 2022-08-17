@@ -7,7 +7,7 @@ import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
 
 @Database(
     entities = [LydiaContactEntity::class],
-    version = 1
+    version = 2
 )
 
 abstract class LydiaContactsDatabase : RoomDatabase() {
