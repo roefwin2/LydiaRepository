@@ -6,7 +6,7 @@ import com.example.lydiacontactsapp.domain.models.LydiaContact
 
 @Entity(tableName = "contacts")
 data class LydiaContactEntity(
-    @PrimaryKey val id : Int? = null,
+    @PrimaryKey val id :String,
     val title : String,
     val firstName :String,
     val lastName :String,
