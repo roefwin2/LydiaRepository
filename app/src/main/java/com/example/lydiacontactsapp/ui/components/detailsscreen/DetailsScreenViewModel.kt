@@ -21,11 +21,11 @@ class DetailsScreenViewModel @Inject constructor(
 
     init {
         savedStateHandle.get<String>("contactId")?.let { contactId ->
-            getContact(contactId.toInt())
+            getContact(contactId)
         }
     }
 
-    private fun getContact(id: Int) {
+    private fun getContact(id: String) {
         viewModelScope.launch {
             val result = lydiaContactsDatabase.dao.getLydiaContact(id)
             state = ContactDetailsState(

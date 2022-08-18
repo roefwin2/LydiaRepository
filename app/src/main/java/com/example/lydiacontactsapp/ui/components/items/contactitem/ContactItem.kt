@@ -16,7 +16,7 @@ import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
 
 
 @Composable
-fun Contact(contact: LydiaContactEntity, onClickListener: (id : Int?) -> Unit) {
+fun Contact(contact: LydiaContactEntity, onClickListener: (id : String) -> Unit) {
     Card(
         Modifier
             .fillMaxWidth()

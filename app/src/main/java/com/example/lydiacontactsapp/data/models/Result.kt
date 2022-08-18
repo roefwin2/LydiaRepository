@@ -39,6 +39,7 @@ data class Result(
         )
 
         fun Result.toLydiaContactEntity() = LydiaContactEntity(
+            id = login.username,
             firstName = name.first,
             lastName = name.last,
             phone = phone,

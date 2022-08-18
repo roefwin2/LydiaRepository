@@ -56,7 +56,7 @@ fun ContactsScreen(
         LazyColumn {
             items(lazyContactsItems) { contact ->
                 Contact(contact = contact!!){
-                    navController.navigate("contact_details" + "/${it}")
+                    navController.navigate("contact_details" + "/${contact.id}")
                 }
             }
         }
