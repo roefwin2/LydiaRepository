@@ -57,7 +57,7 @@ class LydiaContractPagination @Inject constructor(
                 val prevKey = if(page == 1) null else page.minus(1)
                 val nextKey = if(endReached) null else page.plus(1)
                 val keys = response.toLydiaContactsEntity().map {
-                    RemoteKeysEntity(it.id.toString(), prevKey, nextKey)
+                    RemoteKeysEntity(it.id, prevKey, nextKey)
                 }
 
                 keysDao.insertAll(keys)

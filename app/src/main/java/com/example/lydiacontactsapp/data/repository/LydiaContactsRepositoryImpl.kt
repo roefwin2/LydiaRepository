@@ -1,30 +1,26 @@
 package com.example.lydiacontactsapp.data.repository
 
-import com.example.lydiacontactsapp.data.models.LydiaResults.Companion.toPageContactsPair
-import com.example.lydiacontactsapp.data.remote.LydiaContactsApi
+import androidx.paging.*
+import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity.Companion.toLydiaContact
+import com.example.lydiacontactsapp.data.pagination.LydiaContractPagination
 import com.example.lydiacontactsapp.domain.models.LydiaContact
 import com.example.lydiacontactsapp.domain.repository.LydiaContactsRepository
-import com.example.lydiacontactsapp.utils.Error
-import com.example.lydiacontactsapp.utils.Loading
-import com.example.lydiacontactsapp.utils.Resource
-import com.example.lydiacontactsapp.utils.Success
-import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
-class LydiaContactsRepositoryImpl @Inject constructor(
-    private val lydiaContactsApi: LydiaContactsApi
+@ExperimentalPagingApi
+class LydiaContactsRepositoryImpl
+@Inject constructor(
+    private val lydiaContractPagination: LydiaContractPagination
 ) : LydiaContactsRepository {
 
 
-    override fun getContacts(results: Int, page: Int) = flow<Resource<Pair<Int,List<LydiaContact>>>> {
-        emit(Loading())
-        try {
-            val response = lydiaContactsApi.getContacts(results, page)
-            emit(Success(response.toPageContactsPair()))
-        } catch (e: Exception) {
-            emit(Error(e.toString()))
-        }
-    }
+    override fun getContacts(): Flow<PagingData<LydiaContact>> =
+        Pager(PagingConfig(pageSize = 20), remoteMediator = lydiaContractPagination) {
+            lydiaContractPagination.contactsDao.getLydiaContacts()
+        }.flow
+            .map { data -> data.map { it.toLydiaContact() } }
+
 }

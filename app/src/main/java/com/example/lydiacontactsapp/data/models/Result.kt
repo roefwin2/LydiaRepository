@@ -32,11 +32,6 @@ data class Result(
     val registered: Registered
 ){
     companion object{
-        fun Result.toLydiaContact() = LydiaContact(
-            name.first,
-            name.last,
-            phone
-        )
 
         fun Result.toLydiaContactEntity() = LydiaContactEntity(
             id = login.username,

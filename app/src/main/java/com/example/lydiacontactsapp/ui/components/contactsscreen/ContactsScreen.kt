@@ -16,7 +16,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
+import com.example.lydiacontactsapp.domain.models.LydiaContact
 import com.example.lydiacontactsapp.ui.components.items.CustomSnackBar
 import com.example.lydiacontactsapp.ui.components.items.contactitem.Contact
 
@@ -24,10 +24,10 @@ import com.example.lydiacontactsapp.ui.components.items.contactitem.Contact
 @Composable
 fun ContactsScreen(
     navController: NavController,
-    viewModel : ContactsScreenViewModel = hiltViewModel()
+    viewModel: ContactsScreenViewModel = hiltViewModel()
 ) {
     val lydiaContacts = viewModel.state
-    val lazyContactsItems: LazyPagingItems<LydiaContactEntity> =
+    val lazyContactsItems: LazyPagingItems<LydiaContact> =
         lydiaContacts.collectAsLazyPagingItems()
 
     Column(Modifier.fillMaxWidth()) {
@@ -55,7 +55,7 @@ fun ContactsScreen(
         }
         LazyColumn {
             items(lazyContactsItems) { contact ->
-                Contact(contact = contact!!){
+                Contact(contact = contact!!) {
                     navController.navigate("contact_details" + "/${contact.id}")
                 }
             }

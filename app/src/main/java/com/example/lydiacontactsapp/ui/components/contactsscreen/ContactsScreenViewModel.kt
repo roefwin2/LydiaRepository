@@ -2,14 +2,15 @@ package com.example.lydiacontactsapp.ui.components.contactsscreen
 
 
 import androidx.lifecycle.ViewModel
-import androidx.paging.*
-import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
-import com.example.lydiacontactsapp.data.pagination.LydiaContractPagination
+import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingData
 import com.example.lydiacontactsapp.domain.models.LydiaContact
+import com.example.lydiacontactsapp.domain.usecases.GetLydiaContactListUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -17,14 +18,19 @@ import javax.inject.Inject
 @ExperimentalPagingApi
 class ContactsScreenViewModel
 @Inject constructor(
-    private val lydiaContractPagination: LydiaContractPagination
+    private val getLydiaContactListUseCaseImpl: GetLydiaContactListUseCaseImpl
 ) : ViewModel() {
 
-    val state: Flow<PagingData<LydiaContactEntity>> =
-        Pager(PagingConfig(pageSize = 20), remoteMediator = lydiaContractPagination) {
-            lydiaContractPagination.contactsDao.getLydiaContacts()
-        }.flow.catch {
-            println(it.message)
+    var state = flowOf<PagingData<LydiaContact>>(PagingData.empty())
+
+    init {
+        getContactList()
+    }
+
+    private fun getContactList() {
+        viewModelScope.launch {
+            state = getLydiaContactListUseCaseImpl.invoke().map { it }
         }
+    }
 
 }
