@@ -16,9 +16,12 @@ data class LydiaContactEntity(
 ){
     companion object{
         fun LydiaContactEntity.toLydiaContact() = LydiaContact(
+            this.id,
             this.firstName,
             this.lastName,
-            this.phone
+            this.phone,
+            this.imageUrl,
+            this.city,
         )
     }
 }

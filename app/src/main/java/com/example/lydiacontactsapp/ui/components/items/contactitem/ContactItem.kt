@@ -12,11 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.lydiacontactsapp.data.local.entity.LydiaContactEntity
+import com.example.lydiacontactsapp.domain.models.LydiaContact
 
 
 @Composable
-fun Contact(contact: LydiaContactEntity, onClickListener: (id : String) -> Unit) {
+fun Contact(contact: LydiaContact, onClickListener: (id: String) -> Unit) {
     Card(
         Modifier
             .fillMaxWidth()
@@ -25,7 +25,8 @@ fun Contact(contact: LydiaContactEntity, onClickListener: (id : String) -> Unit)
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(16.dp).clickable {
+                .padding(16.dp)
+                .clickable {
                     onClickListener.invoke(contact.id)
                 }
         ) {
@@ -41,7 +42,10 @@ fun Contact(contact: LydiaContactEntity, onClickListener: (id : String) -> Unit)
                 Spacer(modifier = Modifier.padding(2.dp))
                 Text(text = "Lastname ${contact.lastName}")
                 Spacer(modifier = Modifier.padding(10.dp))
-                Text(text = "Number ${contact.phone}",Modifier.border(BorderStroke(2.dp, Color.DarkGray)))
+                Text(
+                    text = "Number ${contact.number}",
+                    Modifier.border(BorderStroke(2.dp, Color.DarkGray))
+                )
             }
 
         }
