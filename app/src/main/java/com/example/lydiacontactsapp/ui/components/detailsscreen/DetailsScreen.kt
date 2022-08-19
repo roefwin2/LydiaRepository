@@ -2,13 +2,14 @@ package com.example.lydiacontactsapp.ui.components.detailsscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.ExperimentalPagingApi
@@ -22,7 +23,10 @@ fun DetailsScreen(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            .padding(24.dp)
+            .background(Color.White, shape = RectangleShape),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Image(
             painter = rememberAsyncImagePainter(viewModel.state.imageUrl),
             contentDescription = null,
@@ -31,47 +35,46 @@ fun DetailsScreen(
                 .padding(4.dp),
 
             )
-            Row(
-                modifier = Modifier
-                    .height(15.dp)
-                    .fillMaxWidth()
-                    .background(Color.Gray)
-            ) {}
+        Row(
+            modifier = Modifier
+                .height(15.dp)
+                .fillMaxWidth()
+                .background(Color.LightGray)
+        ) {}
 
-            Text(text = viewModel.state.firstname)
-            Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = viewModel.state.firstname, fontStyle = FontStyle.Italic)
+        Row(
+            modifier = Modifier
+                .height(15.dp)
+                .fillMaxWidth()
+                .background(Color.LightGray)
+        ) {}
 
-            Row(
-                modifier = Modifier
-                    .height(15.dp)
-                    .fillMaxWidth()
-                    .background(Color.Gray)
-            ) {}
-
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(text = viewModel.state.lastName)
-            Row(
-                modifier = Modifier
-                    .height(15.dp)
-                    .fillMaxWidth()
-                    .background(Color.Gray)
-            ) {}
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(text = viewModel.state.phone)
-            Row(
-                modifier = Modifier
-                    .height(15.dp)
-                    .fillMaxWidth()
-                    .background(Color.Gray)
-            ) {}
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(text = viewModel.state.city)
-            Row(
-                modifier = Modifier
-                    .height(15.dp)
-                    .fillMaxWidth()
-                    .background(Color.Gray)
-            ) {}
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = viewModel.state.lastName, fontStyle = FontStyle.Italic)
+        Row(
+            modifier = Modifier
+                .height(15.dp)
+                .fillMaxWidth()
+                .background(Color.LightGray)
+        ) {}
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = viewModel.state.phone, fontStyle = FontStyle.Italic)
+        Row(
+            modifier = Modifier
+                .height(15.dp)
+                .fillMaxWidth()
+                .background(Color.LightGray)
+        ) {}
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = viewModel.state.city, fontStyle = FontStyle.Italic)
+        Row(
+            modifier = Modifier
+                .height(15.dp)
+                .fillMaxWidth()
+                .background(Color.LightGray)
+        ) {}
 
     }
 }

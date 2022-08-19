@@ -16,7 +16,7 @@ class LydiaContactsRepositoryImpl
     private val lydiaContractPagination: LydiaContractPagination
 ) : LydiaContactsRepository {
 
-
+//create pager to use pagingData and config may be inject in DI
     override fun getContacts(): Flow<PagingData<LydiaContact>> =
         Pager(PagingConfig(pageSize = 20), remoteMediator = lydiaContractPagination) {
             lydiaContractPagination.contactsDao.getLydiaContacts()

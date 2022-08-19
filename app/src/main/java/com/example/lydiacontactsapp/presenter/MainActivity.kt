@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LydiaContactsAppTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
+                Surface(color = Color.LightGray) {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "contact_list_screen" ){
                         composable(
